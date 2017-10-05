@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="./build/react.js"></script>
+        <script src="./build/react-dom.js"></script>
+        <script src="./build/browser.min.js"></script>
+        <script type="text/babel">
+        let Input = React.createClass({
+            // 设置初始化的值
+            getInitialState: function () {
+                return {
+                    value: ''
+                }
+            },
+            handleChange: function (event) {
+                this.setState({
+                    value: event.target.value  // event.target.value读取用户输入的值 textarea, select, radio
+                })
+            },
+            render: function () {
+                let value = this.state.value;
+                return (
+                    <div>
+                        <input type="text" value={value} onChange={this.handleChange} placeholder="请输入"/>
+                        <p>{value}</p>
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(
+            <Input />,
+            document.getElementById('root')
+        )
+        </script>
+    </body>
+</html>

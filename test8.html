@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="./build/react.js"></script>
+        <script src="./build/react-dom.js"></script>
+        <script src="./build/browser.min.js"></script>
+        <script type="text/babel">
+        let LikeButton = React.createClass({
+            // 设置初始状态，liked的值通过this,state获取
+            getInitialState: function () {
+                return {
+                    liked: false
+                }
+            },
+            // 点击后更改状态
+            handleClick: function () {
+                // 修改状态值，每次修改后自动调用this.render，再次渲染
+                this.setState({
+                    liked: !this.state.liked
+                })
+            },
+            render: function () {
+                let text = this.state.liked ?  'like' : 'haven\'t liked';
+                return (
+                    <p onClick={this.handleClick}>
+                        you {text} this.Click to toggle
+                    </p>
+                )
+            }
+        })
+        ReactDOM.render(
+            <LikeButton />,
+            document.getElementById('root')
+        )
+        </script>
+    </body>
+</html>
