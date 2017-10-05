@@ -12,36 +12,36 @@
         <script src="./build/browser.min.js"></script>
         <script src="./build/jquery.min.js"></script>
         <script type="text/babel">
-        let UserGist = React.createClass({
+        let TestClickComponent = React.createClass({
+            render: function () {
+                return (
+                    <div>
+                        <button>显示|隐藏</button>
+                        <span>测试点击</span>
+                    </div>
+                )
+            }
+        });
+        let TestInputComponent = React.createClass({
             getInitialState: function () {
                 return {
-                    username: '',
-                    lastGistUrl: ''
+                    inputContent: ''
                 }
-            },
-            // 先用ajax请求数据，再用this.setState重新渲染ui
-            componentDidMount: function () {
-                $.get(this.props.source, (result) => {
-                    let lastGist = result[0];
-                    if (this.isMounted()) {
-                        this.setState({
-                            username: lastGist.owner.login,
-                            lastGistUrl: lastGist.html_url
-                        })
-                    }
-                })
             },
             render: function () {
                 return (
                     <div>
-                        {this.state.username}'s last gist is
-                        <a href={this.state.lastGistUrl}>here</a>
+                        <input type="text" />
+                        <span>{this.state.inputContent}</span>
                     </div>
                 )
             }
         })
         ReactDOM.render(
-            <UserGist source="https://api.github.com/users/octocat/gists" />,
+            <div>
+                <TestClickComponent />
+                <TestInputComponent />
+            </div>,
             document.getElementById('root')
         )
         </script>
