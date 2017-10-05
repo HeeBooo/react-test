@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="./build/react.js"></script>
+        <script src="./build/react-dom.js"></script>
+        <script src="./build/browser.min.js"></script>
+        <script src="./build/jquery.min.js"></script>
+        <script type="text/babel">
+        let UserGist = React.createClass({
+            getInitialState: function () {
+                return {
+                    username: '',
+                    lastGistUrl: ''
+                }
+            },
+            // 先用ajax请求数据，再用this.setState重新渲染ui
+            componentDidMount: function () {
+                $.get(this.props.source, (result) => {
+                    let lastGist = result[0];
+                    if (this.isMounted()) {
+                        this.setState({
+                            username: lastGist.owner.login,
+                            lastGistUrl: lastGist.html_url
+                        })
+                    }
+                }.bind(this))
+            },
+            render: function () {
+                return (
+                    <div>
+                        {this.state.username}'s last gist is
+                        <a href={this.state.lastGistUrl}>here</a>
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(
+            <UserGist source="https://api.github.com/users/octocat/gists" />,
+            document.getElementById('root')
+        )
+        </script>
+    </body>
+</html>

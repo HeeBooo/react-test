@@ -19,14 +19,28 @@
             },
             // 已经插入真实dom后函数
             componentDidMount: function () {
-                this.timer = setInterval () => {
+                this.timer = setInterval(() => {
                     let opacity = this.state.opacity;
                     opacity -= 0.05;
-                }
+                    if(opacity < 0.1) {
+                        opacity = 1.0;
+                    }
+                    this.setState({
+                        opacity: opacity
+                    })
+                }.bind(this), 100);
+            },
+            render: function () {
+                return (
+                    // 第一重大括号表示是js语法，第二重表示样式对象
+                    <div style={{opacity: this.state.opacity}}>
+                        hello {this.props.name}
+                    </div>
+                )
             }
         })
         ReactDOM.render(
-            <Input />,
+            <Hello name='world' />,
             document.getElementById('root')
         )
         </script>
