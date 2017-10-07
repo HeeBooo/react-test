@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="./build/react.js"></script>
+        <script src="./build/react-dom.js"></script>
+        <script src="./build/browser.min.js"></script>
+        <script src="./build/jquery.min.js"></script>
+        <script type="text/babel">
+        let Title = React.createClass({
+            render: function () {
+                return <h1>{this.props.title}</h1>
+            }
+        })
+        let Href = React.createClass({
+            render: function () {
+                return <a href={this.props.href}>{this.props.href}</a>
+            }
+        })
+        let Website = React.createClass({
+            getInitialState: function () {
+                return {
+                    title: 'baidu',
+                    href: 'www.baidu.com'
+                }
+            },
+            render: function () {
+                return (
+                    <div>
+                        <Title title={this.state.title} />
+                        <Href href={this.state.href} />
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(
+            <Website />,
+            document.getElementById('root')
+        )
+        </script>
+    </body>
+</html>
